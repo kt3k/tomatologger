@@ -1,0 +1,28 @@
+{
+  "name": "tomatologger",
+  "version": "0.0.0",
+  "description": "logging pomodoros",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kt3k/tomatologger.git"
+  },
+  "keywords": [
+    "pomodoro",
+    "productivity"
+  ],
+  "author": "Yoshiya Hinosawa <stibium121@gmail.com> (https://twitter.com/kt3k)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kt3k/tomatologger/issues"
+  },
+  "homepage": "https://github.com/kt3k/tomatologger",
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "es-logger": "^0.2.0",
+    "express": "^4.12.2"
+  }
+}
