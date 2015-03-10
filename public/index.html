@@ -7,6 +7,7 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/qwest/src/qwest.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/handlebars/handlebars.min.js"></script>
 
 </head>
 
@@ -17,6 +18,8 @@
     <p>Hello,</p>
       
     <p>Welcome to tomato logger</p>
+
+    <hr />
 
     <form class="form ajax-form" onsubmit="return false;">
 
@@ -48,9 +51,24 @@
       </div>
 
     </form>
+
+    <hr />
+
+    <div class="ajax-view" data-api="/api/tomato" data-template="#tmpl-tomato" data-response-type="json"></div>
     
-    
-    </div>
+  </div>
+
+<script type="text/x-handlebars" id="tmpl-tomato">
+  <div>
+  <p>total: {{total}}</p>
+  {{#each hits}}
+  <hr />
+  <p>title: {{_source.title}}</p>
+  <p>description: {{_source.title}}</p>
+  <p>started_at: {{_source.started_at}}</p>
+  {{/each}}
+  </div>
+</script>
     
 <script>
 
@@ -73,7 +91,6 @@ var initAjaxFormSingle = function (form) {
 
 
             var paramList = $(form).serializeArray();
-            console.log(paramList);
             var params = {};
 
             paramList.forEach(function (param) {
@@ -81,8 +98,6 @@ var initAjaxFormSingle = function (form) {
                 params[param.name] = param.value;
 
             });
-
-            console.log(params);
 
             if (!api) {
 
@@ -132,9 +147,44 @@ var initAjaxForms = function () {
     });
 };
 
+var initTomatoView = function () {
+
+    $('.ajax-view').each(function () {
+
+        var $div = $(this);
+
+        var api = $div.attr('data-api');
+        var method = $div.attr('data-method') || 'get';
+        var template = $div.attr('data-template');
+        var responseType = $div.attr('data-response-type') || 'auto';
+
+        template = $(template).text().trim();
+
+        var tmpl = Handlebars.compile(template);
+
+        if (!api) {
+
+            throw new Error('api is not specified: ' + api);
+
+        }
+
+        qwest[method](api, null, {responseType: responseType}).then(function (resp) {
+
+            var html = tmpl(resp);
+
+            $div.html(html);
+
+        });
+
+    });
+
+};
+
 $(function () {
 
     initAjaxForms();
+
+    initTomatoView();
 
 });
 

@@ -1,9 +1,22 @@
 
+var esHost = process.env.ES_HOST // elasticsearch host name
+
+var ES = require('elasticsearch');
+
+var esClient = new ES.Client({
+
+    host: esHost,
+    log: 'trace'
+
+});
 
 var tomatoLogger = require('es-logger').create({
-    name: 'tomato-data',
-    host: process.env.ES_HOST // elasticsearch host name
+
+    host: esHost,
+    name: 'tomato-data'
+
 });
+
 
 module.exports = function (app) {
     'use strict';
@@ -11,8 +24,6 @@ module.exports = function (app) {
     app.put('/api/tomato', function (req, res) {
 
         var params = req.body || {};
-
-        console.log(params)
 
         params.started_at = new Date().getTime();
 
@@ -24,7 +35,20 @@ module.exports = function (app) {
 
     });
 
-    app.put('/api/tomato', function (req, res) {
+    app.get('/api/tomato', function (req, res) {
+
+        esClient.search({
+
+            type: 'logs'
+
+        }).then(function (resp) {
+
+            console.log(resp);
+
+            res.json(resp.hits);
+
+        });
+
     });
 
 };
