@@ -1,0 +1,144 @@
+<html>
+
+<head>
+
+  <title>Tomato Logger</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/qwest/src/qwest.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <p>Hello,</p>
+      
+    <p>Welcome to tomato logger</p>
+
+    <form class="form ajax-form" onsubmit="return false;">
+
+      <div class="form-group">
+        <input class="form-control" name="title" placeholder="title" />
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="description" placeholder="description" />
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="mood" placeholder="mood" />
+      </div>
+
+      <div class="form-group">
+        <textarea class="form-control" name="notes" placeholder="notes"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="performance" placeholder="performance" />
+      </div>
+
+      <div class="form-group">
+        <button
+          class="form-control"
+          data-api="/api/tomato"
+          data-method="put">Tomato Log</button>
+      </div>
+
+    </form>
+    
+    
+    </div>
+    
+<script>
+
+var initAjaxFormSingle = function (form) {
+
+    var init = $(form).attr('data-ajax-form-init');
+
+    if (init) {
+        return;
+    }
+
+    var initButton = function () {
+
+        $('button', form).one('click', function () {
+
+            var $btn = $(this);
+
+            var api = $btn.attr('data-api');
+            var method = $btn.attr('data-method') || 'get';
+
+
+            var paramList = $(form).serializeArray();
+            console.log(paramList);
+            var params = {};
+
+            paramList.forEach(function (param) {
+
+                params[param.name] = param.value;
+
+            });
+
+            console.log(params);
+
+            if (!api) {
+
+                throw new Error('api is not specified: ' + api);
+
+            }
+
+            if (!/^(post|get|put|delete)$/.test(method)) {
+
+                throw new Error('method is invalid: ' + method);
+
+            }
+
+            qwest[method](api, params).then(function (res) {
+
+                initButton();
+
+            }).catch(function (e) {
+
+                // rebind button event
+                initButton();
+
+                console.log(e);
+                console.log(e.stack);
+
+            });
+
+        });
+
+    };
+
+    // init the button
+    initButton();
+
+
+    // mark init done
+    $(form).attr('data-ajax-form-init', 'on');
+
+};
+
+var initAjaxForms = function () {
+
+    $('.ajax-form').each(function () {
+
+        initAjaxFormSingle(this);
+
+    });
+};
+
+$(function () {
+
+    initAjaxForms();
+
+});
+
+</script>
+
+</body>
+</html>
