@@ -35,6 +35,7 @@ module.exports = function (app) {
 
     });
 
+
     app.get('/api/tomato', function (req, res) {
 
         esClient.search({
@@ -43,12 +44,11 @@ module.exports = function (app) {
 
         }).then(function (resp) {
 
-            console.log(resp);
-
             res.json(resp.hits);
 
         });
 
     });
+
 
 };
