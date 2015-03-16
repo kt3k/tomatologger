@@ -42,6 +42,8 @@ var Tomato = mongoose.model('Tomato', {
     endedAt: Date,
     interupted: Boolean,
     finished: Boolean,
+    project: String,
+    tags: [String],
     accountId: String
 });
 

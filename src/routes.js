@@ -60,6 +60,8 @@ module.exports = function (app) {
 
             next();
 
+            return;
+
         }
 
         res.status(401).json({
@@ -111,6 +113,12 @@ module.exports = function (app) {
         params.updatedAt = now;
 
         params.accountId = req.account.id
+
+        if (params.tags instanceof String) {
+
+            params.tags = params.tags.trim().split(/\s+/);
+
+        }
 
         esLogger.info(params);
 
