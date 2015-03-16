@@ -1,7 +1,17 @@
 
 var mongoose = require('mongoose');
+
+// polyfill of catch
+// https://github.com/aheckmann/mpromise/pull/14
+require('mongoose/node_modules/mpromise').prototype.catch = function (onReject) {
+    return this.then(undefined, onReject);
+};
+
 mongoose.connect(process.env.MONGO_URI);
 
+/**
+ * Saves the model and returns a promise
+ */
 mongoose.Model.prototype.psave = function () {
 
     var that = this;
@@ -37,8 +47,15 @@ var Tomato = mongoose.model('Tomato', {
 
 var Account = mongoose.model('Account', {
     id: String,
-    name: String
+    displayName: String,
+    facebookId: String
 });
+
+Account.prototype.picture = function () {
+
+    return 'http://graph.facebook.com/' + this.facebookId + '/picture';
+
+};
 
 
 module.exports.Tomato = Tomato;
