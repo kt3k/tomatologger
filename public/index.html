@@ -60,12 +60,12 @@
 
 <script type="text/x-handlebars" id="tmpl-tomato">
   <div>
-  <p>total: {{total}}</p>
-  {{#each hits}}
+  <p>total: {{count}}</p>
+  {{#each items}}
   <hr />
-  <p>title: {{_source.title}}</p>
-  <p>description: {{_source.title}}</p>
-  <p>started_at: {{_source.started_at}}</p>
+  <p>title: {{title}}</p>
+  <p>notes: {{notes}}</p>
+  <p>started at: {{startedAt}}</p>
   {{/each}}
   </div>
 </script>

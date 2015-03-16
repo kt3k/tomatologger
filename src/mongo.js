@@ -36,6 +36,7 @@ var Tomato = mongoose.model('Tomato', {
 });
 
 var Account = mongoose.model('Account', {
+    id: String,
     name: String
 });
 
