@@ -7,6 +7,7 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/qwest/src/qwest.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/ajax-form.js/index.js"></script>
   <script src="bower_components/handlebars/handlebars.min.js"></script>
 
 </head>
@@ -68,89 +69,6 @@
     
 <script>
 
-var initAjaxFormSingle = function (form) {
-
-    var ATTR_INITIALIZED = 'data-ajax-form-initialized';
-    var ATTR_API = 'data-api';
-    var ATTR_METHOD = 'data-method';
-
-    var initialized = $(form).attr(ATTR_INITIALIZED);
-
-    if (initialized) {
-        return;
-    }
-
-    var initButton = function () {
-
-        $('button', form).one('click', function () {
-
-            var $btn = $(this);
-
-            var api = $btn.attr(ATTR_API);
-            var method = $btn.attr(ATTR_METHOD) || 'get';
-
-
-            var paramList = $(form).serializeArray();
-            var params = {};
-
-            paramList.forEach(function (param) {
-
-                params[param.name] = param.value;
-
-            });
-
-            if (!api) {
-
-                throw new Error('api is not specified: ' + api);
-
-            }
-
-            if (!/^(post|get|put|delete)$/.test(method)) {
-
-                throw new Error('method is invalid: ' + method);
-
-            }
-
-            qwest[method](api, params).then(function (res) {
-
-                $btn.trigger('success.ajax-form', res);
-
-            }).catch(function (e) {
-
-                $btn.trigger('failure.ajax-form', e);
-
-                console.log(e);
-                console.log(e.stack);
-
-            }).then(function () {
-
-                // rebind button event
-                initButton();
-
-            });
-
-        });
-
-    };
-
-    // init the button
-    initButton();
-
-
-    // mark init done
-    $(form).attr(ATTR_INITIALIZED, 'on');
-
-};
-
-var initAjaxForms = function () {
-
-    $('.ajax-form').each(function () {
-
-        initAjaxFormSingle(this);
-
-    });
-};
-
 var initAjaxView = function () {
 
     $('.ajax-view').each(function () {
@@ -185,8 +103,6 @@ var initAjaxView = function () {
 };
 
 $(function () {
-
-    initAjaxForms();
 
     $('form.ajax-form').on('success.ajax-form', function () {
 
