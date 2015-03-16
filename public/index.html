@@ -28,10 +28,6 @@
       </div>
 
       <div class="form-group">
-        <input class="form-control" name="description" placeholder="description" />
-      </div>
-
-      <div class="form-group">
         <input class="form-control" name="mood" placeholder="mood" />
       </div>
 
@@ -64,7 +60,7 @@
   {{#each items}}
   <hr />
   <p>title: {{title}}</p>
-  <p>notes: {{notes}}</p>
+  <p>notes: <pre>{{notes}}</pre></p>
   <p>started at: {{startedAt}}</p>
   {{/each}}
   </div>
@@ -74,9 +70,13 @@
 
 var initAjaxFormSingle = function (form) {
 
-    var init = $(form).attr('data-ajax-form-init');
+    var ATTR_INITIALIZED = 'data-ajax-form-initialized';
+    var ATTR_API = 'data-api';
+    var ATTR_METHOD = 'data-method';
 
-    if (init) {
+    var initialized = $(form).attr(ATTR_INITIALIZED);
+
+    if (initialized) {
         return;
     }
 
@@ -86,8 +86,8 @@ var initAjaxFormSingle = function (form) {
 
             var $btn = $(this);
 
-            var api = $btn.attr('data-api');
-            var method = $btn.attr('data-method') || 'get';
+            var api = $btn.attr(ATTR_API);
+            var method = $btn.attr(ATTR_METHOD) || 'get';
 
 
             var paramList = $(form).serializeArray();
@@ -113,15 +113,19 @@ var initAjaxFormSingle = function (form) {
 
             qwest[method](api, params).then(function (res) {
 
-                initButton();
+                $btn.trigger('success.ajax-form', res);
 
             }).catch(function (e) {
 
-                // rebind button event
-                initButton();
+                $btn.trigger('failure.ajax-form', e);
 
                 console.log(e);
                 console.log(e.stack);
+
+            }).then(function () {
+
+                // rebind button event
+                initButton();
 
             });
 
@@ -134,7 +138,7 @@ var initAjaxFormSingle = function (form) {
 
 
     // mark init done
-    $(form).attr('data-ajax-form-init', 'on');
+    $(form).attr(ATTR_INITIALIZED, 'on');
 
 };
 
@@ -147,7 +151,7 @@ var initAjaxForms = function () {
     });
 };
 
-var initTomatoView = function () {
+var initAjaxView = function () {
 
     $('.ajax-view').each(function () {
 
@@ -184,7 +188,13 @@ $(function () {
 
     initAjaxForms();
 
-    initTomatoView();
+    $('form.ajax-form').on('success.ajax-form', function () {
+
+        location.reload();
+
+    });
+
+    initAjaxView();
 
 });
 
