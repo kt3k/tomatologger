@@ -150,4 +150,11 @@ module.exports = function (app) {
     });
 
 
+    app.get('/api/users/me', auth, authRequired, function (req, res) {
+
+        res.json({account: req.account});
+
+    });
+
+
 };
