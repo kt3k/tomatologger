@@ -4,8 +4,8 @@ var redis = require('then-redis');
 
 module.exports = redis.createClient({
 
-    host: REDIS_HOST,
-    port: REDIS_PORT,
-    password: REDIS_PASSWORD
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD
 
 });

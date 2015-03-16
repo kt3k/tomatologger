@@ -1,17 +1,22 @@
+require('es6-promise').polyfill();
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var chalk = require('chalk');
 
-require('es6-promise').polyfill();
 
 var app = express();
 
-app.use(express.static('public'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 
 require('./src/routes')(app);
+app.use(express.static('public'));
+
 
 var server = app.listen(process.env.PORT || 18000, function () {
 
