@@ -114,7 +114,7 @@ module.exports = function (app) {
 
         params.accountId = req.account.id
 
-        if (params.tags instanceof String) {
+        if (typeof params.tags === 'string') {
 
             params.tags = params.tags.trim().split(/\s+/);
 
