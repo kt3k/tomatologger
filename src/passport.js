@@ -4,6 +4,8 @@ var mongo = require('./mongo');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
+var uuid = require('uuid');
+
 
 passport.use(new FacebookStrategy({
 
@@ -20,6 +22,7 @@ passport.use(new FacebookStrategy({
 
     }, {
 
+        id: uuid.v4(),
         displayName: profile.displayName
 
     }, {
