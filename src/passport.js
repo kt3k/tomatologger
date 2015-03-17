@@ -11,7 +11,7 @@ passport.use(new FacebookStrategy({
 
     clientID: process.env.FB_APP_ID,
     clientSecret: process.env.FB_APP_SECRET,
-    callbackURL: 'http://localhost:18000/auth/facebook/callback',
+    callbackURL: 'http://' + process.env.SERVICE_HOSTNAME + '/auth/facebook/callback',
     enableProof: false
 
 }, function (accessToken, refreshToken, profile, done) {
