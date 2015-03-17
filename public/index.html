@@ -17,21 +17,35 @@
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-9">
+        <div class="col-xs-8">
           <img style="float: left; margin: 7px -7px 0 3px;" src="/img/tomato.png" width=35 height="35" />
           <span class="navbar-brand" style="margin-left: 0;">
             Pomodoro Meter
           </span>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-4">
           <p
-          class="text-right ajax-view"
           style="margin: 7px 0;"
-          data-api="/api/users/me"
-          data-template="#tmpl-facebook-img"></p>
-          <script type="text/x-handlebars" id="tmpl-facebook-img">
-            <img src="http://graph.facebook.com/{{account.facebookId}}/picture" width="35" height="35" style="border-radius: 8px;" title="{{account.displayName}}" />
-          </script>
+          class="text-right">
+
+            <span
+            class="badge progress-bar-info ajax-view"
+            data-api="/api/tomato"
+            data-template="#tpl-tomato-count"></span>
+            <script type="text/x-handlebars" id="tpl-tomato-count">
+              <img src="/img/tomato.png" width="15" height="15" />
+              {{count}}
+            </script>
+
+            <span
+            class="ajax-view"
+            data-api="/api/users/me"
+            data-template="#tmpl-facebook-img"></span>
+            <script type="text/x-handlebars" id="tmpl-facebook-img">
+              <img src="http://graph.facebook.com/{{account.facebookId}}/picture" width="35" height="35" style="border-radius: 8px;" title="{{account.displayName}}" />
+            </script>
+
+          </p>
         </div>
       </div>
     </div>
@@ -71,18 +85,10 @@
 
     </form>
 
-    <hr />
-
     <div class="ajax-view" data-api="/api/tomato" data-template="#tmpl-tomato">
     </div>
     <script type="text/x-handlebars" id="tmpl-tomato">
       <div>
-        <p>
-        <span class="badge progress-bar-info">
-          <img src="/img/tomato.png" width="15" height="15" />
-          {{count}}
-        </span>
-        </p>
         {{#each items}}
           <hr />
           <p><img src="/img/tomato.png" width="15" height="15" /> {{title}}</p>
