@@ -67,8 +67,49 @@ var authRequired = function (req, res, next) {
 
 };
 
-module.exports = auth
-module.exports.required = authRequired
+
+var loginRedirect = function (redirect) {
+    'use strict';
+
+    return function (req, res, next) {
+
+        if (req.account) {
+
+            res.redirect(redirect);
+
+            return;
+
+        }
+
+        next();
+
+    };
+
+};
+
+var noLoginRedirect = function (redirect) {
+    'use strict';
+
+    return function (req, res, next) {
+
+        if (!req.account) {
+
+            res.redirect(redirect);
+
+            return;
+
+        }
+
+        next();
+
+    };
+
+};
+
+module.exports = auth;
+module.exports.required = authRequired;
+module.exports.loginRedirect = loginRedirect;
+module.exports.noLoginRedirect = noLoginRedirect;
 
 module.exports.addRoutes = function (app) {
     'use strict';
