@@ -17,21 +17,21 @@
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-9">
           <img style="float: left; margin: 7px -7px 0 3px;" src="/img/tomato.png" width=35 height="35" />
           <span class="navbar-brand" style="margin-left: 0;">
             Pomodoro Meter
           </span>
         </div>
-        <div class="col-xs-6">
-            <p
-            class="text-right ajax-view"
-            style="margin: 7px 0;"
-            data-api="/api/users/me"
-            data-template="#tmpl-facebook-img"></p>
-            <script type="text/x-handlebars" id="tmpl-facebook-img">
-                <img src="http://graph.facebook.com/{{account.facebookId}}/picture" width="35" height="35" style="border-radius: 8px;" title="{{account.displayName}}" />
-            </script>
+        <div class="col-xs-3">
+          <p
+          class="text-right ajax-view"
+          style="margin: 7px 0;"
+          data-api="/api/users/me"
+          data-template="#tmpl-facebook-img"></p>
+          <script type="text/x-handlebars" id="tmpl-facebook-img">
+            <img src="http://graph.facebook.com/{{account.facebookId}}/picture" width="35" height="35" style="border-radius: 8px;" title="{{account.displayName}}" />
+          </script>
         </div>
       </div>
     </div>
@@ -66,28 +66,41 @@
         <button
           class="form-control"
           data-api="/api/tomato"
-          data-method="put">Tomato Log</button>
+          data-method="put">Start Pomodoro</button>
       </div>
 
     </form>
 
     <hr />
 
-    <div class="ajax-view" data-api="/api/tomato" data-template="#tmpl-tomato"></div>
-    
-  </div>
+    <div class="ajax-view" data-api="/api/tomato" data-template="#tmpl-tomato">
+    </div>
+    <script type="text/x-handlebars" id="tmpl-tomato">
+      <div>
+        <p>
+        <span class="badge progress-bar-info">
+          <img src="/img/tomato.png" width="15" height="15" />
+          {{count}}
+        </span>
+        </p>
+        {{#each items}}
+          <hr />
+          <p><img src="/img/tomato.png" width="15" height="15" /> {{title}}</p>
+          <p>mood <span class="label label-default">{{mood}}</span></p>
+          <p>notes <pre>{{notes}}</pre></p>
+          <p>project <span class="label label-default">{{project}}</span></p>
+          <p>
+            tags
+            {{#each tags}}
+              <span class="label label-default">{{this}}</span>
+            {{/each}}
+          </p>
+          <p>started at {{startedAt}}</p>
+        {{/each}}
+      </div>
+    </script>
 
-<script type="text/x-handlebars" id="tmpl-tomato">
-  <div>
-  <p>total: {{count}}</p>
-  {{#each items}}
-  <hr />
-  <p>title: {{title}}</p>
-  <p>notes: <pre>{{notes}}</pre></p>
-  <p>started at: {{startedAt}}</p>
-  {{/each}}
   </div>
-</script>
     
 <script>
 
