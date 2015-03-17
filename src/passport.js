@@ -22,7 +22,6 @@ passport.use(new FacebookStrategy({
 
     }, {
 
-        id: uuid.v4(),
         displayName: profile.displayName
 
     }, {
@@ -31,7 +30,17 @@ passport.use(new FacebookStrategy({
 
     }).exec().then(function (account) {
 
-        done(null, account);
+        if (!account.id) {
+
+            account.id = uuid.v4();
+
+        }
+
+        return account.psave().then(function () {
+
+            done(null, account);
+
+        });
 
     }, function (err) {
 
