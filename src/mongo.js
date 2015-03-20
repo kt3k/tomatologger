@@ -40,17 +40,21 @@ var Tomato = mongoose.model('Tomato', {
     performance: Number,
     startedAt: Date,
     endedAt: Date,
-    interupted: Boolean,
-    finished: Boolean,
+    status: String, // started, finished, interupted
     project: String,
     tags: [String],
-    accountId: String
+    accountId: String,
+    privacy: String // friend, public, private
 });
 
 var Account = mongoose.model('Account', {
     id: String,
     displayName: String,
-    facebookId: String
+    givenName: String,
+    familyName: String,
+    middleName: String,
+    facebookId: String,
+    count: Number
 });
 
 Account.prototype.picture = function () {
