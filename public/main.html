@@ -27,28 +27,23 @@
         <div class="col-sm-4">
           <p
           style="margin: 7px 0;"
-          class="text-right">
+          data-api="/api/users/me"
+          data-template="#tpl-header-right"
+          class="text-right ajax-view"></p>
+          <script type="text/x-dust" id="tpl-header-right">
 
-            <span
-              class="badge progress-bar-info ajax-view"
-              data-api="/api/tomato"
-              data-template="#tpl-tomato-count"></span>
+            <span class="badge progress-bar-info">
 
-            <script type="text/x-handlebars" id="tpl-tomato-count">
               <img src="/img/tomato.png" width="15" height="15" />
-              {~s}{count}
-            </script>
+              {~s}{account.tomatoCount}
 
-            <span
-              class="ajax-view"
-              data-api="/api/users/me"
-              data-template="#tpl-facebook-img"></span>
-
-            <script type="text/x-handlebars" id="tpl-facebook-img">
+            </span>
+            {~s}
+            <span>
               <img src="http://graph.facebook.com/{account.facebookId}/picture" width="35" height="35" style="border-radius: 8px;" title="{account.displayName}" />
-            </script>
+            </span>
+          </script>
 
-          </p>
         </div>
       </div>
     </div>
