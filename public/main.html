@@ -94,27 +94,46 @@
     </div>
     <script type="text/x-dustjs" id="tpl-tomato">
       <div>
+
         {#items}
+
         <div class="panel panel-default" style="border-color: #ccc;">
+
           <div class="panel-body" style="padding-bottom: 0px;">
+
             <p><span class="badge progress-bar-info">
               <img src="/img/tomato.png" width="15" height="15" /> {title}</p>
             </p>
-            <p>mood <span class="label label-default">{mood}</span></p>
+
+            {?mood}
+              <p>mood <span class="label label-default">{mood}</span></p>
+            {/mood}
+
             {?notes}
               <p>notes <pre>{notes}</pre></p>
             {/notes}
-            <p>project <span class="label label-default">{project}</span></p>
+
+            {?project}
+              <p>project <span class="label label-default">{project}</span></p>
+            {/project}
+
+            {?tags}
             <p>
               tags
               {#tags}
                 {~s}<span class="label label-default">{.}</span>
               {/tags}
             </p>
+            {/tags}
+
             <p>started at {startedAt}</p>
+
             </div>
+
           </div>
+
         {/items}
+
       </div>
     </script>
 
