@@ -17,6 +17,7 @@
     "qwest": "~1.5.7",
     "bootstrap": "~3.3.2",
     "handlebars": "~3.0.0",
-    "ajax-form.js": "~0.1.2"
+    "ajax-form.js": "~0.1.2",
+    "ajax-view": "~0.1.4"
   }
 }
