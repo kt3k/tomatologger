@@ -4,6 +4,7 @@ var uuid = require('uuid');
 
 var redis = require('./redis');
 var passport = require('./passport');
+var mongo = require('./mongo');
 
 
 var SESSID = 'tssid';
@@ -22,6 +23,8 @@ var initSession = function (req, res) {
 
     }
 
+    req.ssid = ssid;
+
     return ssid;
 
 };
@@ -32,7 +35,7 @@ var auth = function (req, res, next) {
 
     redis.get(ssid).then(function (account) {
 
-        req.account = account ? JSON.parse(account) : null;
+        req.account = account ? new mongo.Account(JSON.parse(account)) : null;
 
         next();
 

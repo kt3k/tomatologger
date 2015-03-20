@@ -54,7 +54,7 @@ var Account = mongoose.model('Account', {
     familyName: String,
     middleName: String,
     facebookId: String,
-    count: Number
+    tomatoCount: Number
 });
 
 Account.prototype.picture = function () {

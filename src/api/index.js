@@ -2,6 +2,7 @@
 
 var mongo = require('../mongo');
 var esLogger = require('../es-logger');
+var redis = require('../redis');
 
 var auth = require('../auth');
 
@@ -14,11 +15,17 @@ module.exports.addRoutes = function (app) {
 
         var now = new Date().getTime();
 
+        var account = req.account;
+
         params.startedAt = now;
         params.createdAt = now;
         params.updatedAt = now;
 
-        params.accountId = req.account.id
+        params.privacy = 'friend';
+
+        params.status = 'started';
+
+        params.accountId = account.id
 
         if (typeof params.tags === 'string') {
 
@@ -26,11 +33,22 @@ module.exports.addRoutes = function (app) {
 
         }
 
-        esLogger.info(params);
-
         var tomato = new mongo.Tomato(params);
 
-        tomato.psave().then(function () {
+        account.tomatoCount = account.tomatoCount || 0;
+        account.tomatoCount ++;
+
+        console.log(account);
+
+        esLogger.info(params);
+
+        Promise.all([
+
+            redis.set(req.ssid, JSON.stringify(account)),
+            account.update().exec(),
+            tomato.psave()
+
+        ]).then(function () {
 
             res.json(params);
 
