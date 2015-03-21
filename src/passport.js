@@ -39,6 +39,12 @@ passport.use(new FacebookStrategy({
 
         }
 
+        if (!account.createdAt) {
+
+            account.createdAt = new Date();
+
+        }
+
         return account.psave().then(function () {
 
             done(null, account);
