@@ -4,3 +4,6 @@
 
 # secrets
 /secret*
+
+# local mongo data
+/data
