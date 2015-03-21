@@ -6,34 +6,20 @@ var redis = require('../redis');
 
 var auth = require('../auth');
 
+var tomatoFactory = require('./domain/tomato-factory').getInstance();
+
 module.exports.addRoutes = function (app) {
     'use strict';
 
     app.put('/api/tomato', auth, auth.required, function (req, res) {
 
-        var params = req.body || {};
-
-        var now = new Date().getTime();
-
         var account = req.account;
 
-        params.startedAt = now;
-        params.createdAt = now;
-        params.updatedAt = now;
-
-        params.privacy = 'friend';
-
-        params.status = 'started';
+        var params = req.body || {};
 
         params.accountId = account.id
 
-        if (typeof params.tags === 'string') {
-
-            params.tags = params.tags.trim().split(/\s+/);
-
-        }
-
-        var tomato = new mongo.Tomato(params);
+        var tomato = tomatoFactory.createFromObject(params);
 
         account.tomatoCount = account.tomatoCount || 0;
         account.tomatoCount ++;

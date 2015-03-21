@@ -38,7 +38,9 @@ var Tomato = mongoose.model('Tomato', {
     notes: String,
     mood: String,
     performance: Number,
-    startedAt: Date,
+    startedAt: Number,
+    createdAt: Number,
+    updatedAt: Number,
     endedAt: Date,
     status: String, // started, finished, interupted
     project: String,
@@ -54,7 +56,9 @@ var Account = mongoose.model('Account', {
     familyName: String,
     middleName: String,
     facebookId: String,
-    tomatoCount: Number
+    tomatoCount: Number,
+    createdAt: Number,
+    updatedAt: Number
 });
 
 Account.prototype.picture = function () {
