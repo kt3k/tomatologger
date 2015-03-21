@@ -45,8 +45,18 @@ var TomatoFactory = module.exports = subclass(function (pt) {
             throw new Error('Account id is required for creating tomato object.');
         }
 
-        if (typeof obj.tags === 'string') {
+        if (typeof obj.tags === 'string' && obj.tags !== '') {
+
             obj.tags = obj.tags.trim().split(/\s+/);
+
+        } else if (obj.tags instanceof Array) {
+
+            // do nothing
+
+        } else {
+
+            obj.tags = [];
+
         }
 
         return new mongo.Tomato(obj);
