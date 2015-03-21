@@ -1,5 +1,6 @@
 # TODO
-- create Tomato domain
+- model
+  - TomatoCountRepository
   - TomatoRepository
   - AccountFactory
   - AccountRepository
