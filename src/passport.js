@@ -22,7 +22,10 @@ passport.use(new FacebookStrategy({
 
     }, {
 
-        displayName: profile.displayName
+        displayName: profile.displayName,
+        givenName: profile.name.givenName,
+        familyName: profile.name.familyName,
+        givenName: profile.name.givenName
 
     }, {
 
