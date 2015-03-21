@@ -1,5 +1,9 @@
 # TODO
-- separate ajax-view
+- create Tomato domain
+  - create TomatoFactory, TomatoRepository, AccountFactory, AccountRepository
 - introduce middleman
-- add createdAt, tomatoCount to account
 - users page
+
+# DONE
+- separate ajax-view
+- add createdAt, tomatoCount to account
