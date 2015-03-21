@@ -72,7 +72,7 @@ module.exports.addRoutes = function (app) {
     });
 
 
-    app.get('/api/users/me', auth, auth.required, function (req, res) {
+    app.get('/api/accounts/me', auth, auth.required, function (req, res) {
 
         res.json({account: req.account});
 
