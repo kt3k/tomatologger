@@ -6,6 +6,7 @@ var redis = require('../redis');
 
 var auth = require('../auth');
 
+var TomatoCountRepository = require('./domain/tomato-count-repository');
 var tomatoFactory = require('./domain/tomato-factory').getInstance();
 
 module.exports.addRoutes = function (app) {
@@ -24,12 +25,14 @@ module.exports.addRoutes = function (app) {
         account.tomatoCount = account.tomatoCount || 0;
         account.tomatoCount ++;
 
+        var tcRepo = TomatoCountRepository.getInstance(account.id);
+
         esLogger.info(params);
 
         Promise.all([
 
-            redis.set(req.ssid, JSON.stringify(account)),
-            mongo.Account.findOneAndUpdate({_id: account._id}, account).exec(),
+            tcRepo.save(account.tomatoCount),
+            mongo.Account.findOneAndUpdate({_id: account._id}, {$inc: {tomatoCount: 1}}).exec(),
             tomato.psave()
 
         ]).then(function () {

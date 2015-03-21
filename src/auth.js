@@ -6,6 +6,8 @@ var redis = require('./redis');
 var passport = require('./passport');
 var mongo = require('./mongo');
 
+var AccountRepository = require('./api/domain/account-repository');
+
 
 var SESSID = 'tssid';
 
@@ -33,9 +35,9 @@ var auth = function (req, res, next) {
 
     var ssid = initSession(req, res);
 
-    redis.get(ssid).then(function (account) {
+    AccountRepository.getInstance().getBySessionId(ssid).then(function (account) {
 
-        req.account = account ? new mongo.Account(JSON.parse(account)) : null;
+        req.account= account;
 
         next();
 
