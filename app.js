@@ -14,6 +14,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
+app.use(function (req, res, next) {
+
+    console.log(req.method + ' ' + req.path);
+
+    next();
+
+});
+
+
 require('./src/routes')(app);
 app.use(express.static('public'));
 
