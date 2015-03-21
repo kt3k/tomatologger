@@ -35,7 +35,10 @@
             <span class="badge progress-bar-info">
 
               <img src="/img/tomato.png" width="15" height="15" />
-              {~s}{account.tomatoCount}
+              {~s}
+              {#account}
+                {?tomatoCount}{tomatoCount}{:else}0{/tomatoCount}
+              {/account}
 
             </span>
             {~s}
