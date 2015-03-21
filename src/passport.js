@@ -41,7 +41,7 @@ passport.use(new FacebookStrategy({
 
         if (!account.createdAt) {
 
-            account.createdAt = new Date();
+            account.createdAt = new Date().getTime();
 
         }
 
@@ -54,6 +54,11 @@ passport.use(new FacebookStrategy({
     }, function (err) {
 
         done(err);
+
+    }).then(null, function (err) {
+
+        console.log(err);
+        console.log(err.stack);
 
     });
 
