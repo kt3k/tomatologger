@@ -38,14 +38,12 @@ module.exports.addRoutes = function (app) {
         account.tomatoCount = account.tomatoCount || 0;
         account.tomatoCount ++;
 
-        console.log(account);
-
         esLogger.info(params);
 
         Promise.all([
 
             redis.set(req.ssid, JSON.stringify(account)),
-            account.update().exec(),
+            mongo.Account.findOneAndUpdate({_id: account._id}, account).exec(),
             tomato.psave()
 
         ]).then(function () {
