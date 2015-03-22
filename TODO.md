@@ -1,8 +1,10 @@
 # TODO
+- friends page
+- calculate count correctly
 - introduce middleman
-- users page
 
 # DONE
+- GET /api/accounts
 - create Tomato domain
   - TomatoCreationSerivce
   - TomatoRepository

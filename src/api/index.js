@@ -8,6 +8,7 @@ var auth = require('../auth');
 
 var TomatoCreationService = require('./domain/tomato-creation-service');
 var TomatoRepository = require('./domain/tomato-repository');
+var AccountRepository = require('./domain/account-repository');
 
 
 
@@ -57,5 +58,15 @@ module.exports.addRoutes = function (app) {
 
     });
 
+
+    app.get('/api/accounts', function (req, res) {
+
+        AccountRepository.getInstance().get().then(function(accounts) {
+
+            res.json({count: accounts.lenght, items: accounts});
+
+        });
+
+    });
 
 };

@@ -10,15 +10,28 @@ var AccountFactory = require('./account-factory');
 
 
 var AccountRepository = subclass(function (pt) {
+
     'use strict';
 
     pt.constructor.getInstance = function () {
         return new this();
     };
 
+
+    /**
+     * @param {Account} account The account
+     */
     pt.save = function (account) {
+
+        return Promise.resolve(account.psave());
+
     };
 
+
+    /**
+     * @param {String} id The account id
+     * @return {Promise of Account}
+     */
     pt.getById = function (id) {
 
         return Promise.resolve(mongo.Account.findOne({id: id}).exec()).then(function (data) {
@@ -32,6 +45,10 @@ var AccountRepository = subclass(function (pt) {
     pt.getOrCreateByFacebookId = function (facebookId) {
     };
 
+    /**
+     * @param {String} ssid The session id
+     * @return {Promise of Account}
+     */
     pt.getBySessionId = function (ssid) {
 
         var that = this;
@@ -69,6 +86,16 @@ var AccountRepository = subclass(function (pt) {
             });
 
         });
+
+    };
+
+
+    /**
+     * @return {Promise of Array of Account}
+     */
+    pt.get = function () {
+
+        return Promise.resolve(mongo.Account.find().sort({tomatoCount: -1}).exec());
 
     };
 
