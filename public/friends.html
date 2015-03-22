@@ -1,0 +1,91 @@
+<html>
+
+<head>
+
+  <title>Tomato Logger</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/qwest/src/qwest.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/ajax-form.js/index.js"></script>
+  <script src="bower_components/dustjs-linkedin/dist/dust-full.min.js"></script>
+  <script src="bower_components/ajax-view/ajax-view.js"></script>
+
+</head>
+
+<body style="background-color: #f0f0f0;">
+
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <a href="/main.html">
+            <img style="float: left; margin: 7px -7px 0 3px;" src="/img/tomato.png" width=35 height="35" />
+          </a>
+          <a class="navbar-brand" href="/main.html" style="margin-left: 0;">
+            Pomodoro Meter
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+
+    <div
+    class="ajax-view"
+    data-api="/api/accounts"
+    data-template="#tpl-accounts">
+    </div>
+    <script type="text/x-dustjs" id="tpl-accounts">
+      <div>
+
+        {#items}
+
+        <div class="panel panel-default" style="border-color: #ccc;">
+
+          <div class="panel-body" style="padding-bottom: 0px;">
+
+            <p>
+              <img src="http://graph.facebook.com/{facebookId}/picture" style="border-radius: 12px;" title="{displayName}" />
+            </p>
+
+            <p>
+              {givenName}
+            </p>
+
+            <p>
+              <span class="badge progress-bar-info">
+                <img src="/img/tomato.png" width="15" height="15" /> {tomatoCount}
+              </span>
+            </p>
+
+            <hr />
+
+            <p>created at {createdAt}</p>
+
+            </div>
+
+          </div>
+
+        {/items}
+
+      </div>
+    </script>
+
+  </div>
+    
+  <script>
+  $(function () {
+
+      $('form.ajax-form').on('success.ajax-form', function () {
+
+          location.reload();
+
+      });
+
+  });
+  </script>
+
+</body>
+</html>
