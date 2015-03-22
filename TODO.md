@@ -3,6 +3,7 @@
 - friend link
 - header right dropdown menu
 - calculate count correctly
+- pomodoro timer component
 
 # DONE
 - friends page
