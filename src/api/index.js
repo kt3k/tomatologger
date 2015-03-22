@@ -6,8 +6,7 @@ var redis = require('../redis');
 
 var auth = require('../auth');
 
-var TomatoCountRepository = require('./domain/tomato-count-repository');
-var tomatoFactory = require('./domain/tomato-factory').getInstance();
+var TomatoCreationService = require('./domain/tomato-creation-service');
 
 module.exports.addRoutes = function (app) {
     'use strict';
@@ -18,26 +17,13 @@ module.exports.addRoutes = function (app) {
 
         var params = req.body || {};
 
-        params.accountId = account.id
-
-        var tomato = tomatoFactory.createFromObject(params);
-
-        account.tomatoCount = account.tomatoCount || 0;
-        account.tomatoCount ++;
-
-        var tcRepo = TomatoCountRepository.getInstance(account.id);
-
         esLogger.info(params);
 
-        Promise.all([
+        var tcService = new TomatoCreationService(req.account);
 
-            tcRepo.save(account.tomatoCount),
-            mongo.Account.findOneAndUpdate({_id: account._id}, {$inc: {tomatoCount: 1}}).exec(),
-            tomato.psave()
+        tcService.createFromObject(params).then(function (tomato) {
 
-        ]).then(function () {
-
-            res.json(params);
+            res.json(tomato);
 
         }).catch(function (err) {
 
