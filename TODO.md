@@ -1,9 +1,11 @@
 # TODO
-- friends page
-- calculate count correctly
 - introduce middleman
+- friend link
+- header right dropdown menu
+- calculate count correctly
 
 # DONE
+- friends page
 - GET /api/accounts
 - create Tomato domain
   - TomatoCreationSerivce
