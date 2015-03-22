@@ -1,15 +1,19 @@
 
 
-var mongo = require('../mongo');
 var esLogger = require('../es-logger');
-var redis = require('../redis');
+
 
 var auth = require('../auth');
 
+
 var TomatoCreationService = require('./domain/tomato-creation-service');
+var TomatoRepository = require('./domain/tomato-repository');
+
+
 
 module.exports.addRoutes = function (app) {
     'use strict';
+
 
     app.put('/api/tomato', auth, auth.required, function (req, res) {
 
@@ -38,7 +42,7 @@ module.exports.addRoutes = function (app) {
 
     app.get('/api/tomato', auth, auth.required, function (req, res) {
 
-        mongo.Tomato.find({accountId: req.account.id}).sort({startedAt: -1}).exec().then(function (tomatoes) {
+        TomatoRepository.getInstance().getByAccountId(req.account.id).then(function (tomatoes) {
 
             res.json({count: tomatoes.length, items: tomatoes});
 

@@ -23,6 +23,20 @@ var TomatoRepository = subclass(function (pt) {
 
     };
 
+
+    /**
+     * @param {String} accountId The account id
+     */
+    pt.getByAccountId = function (accountId) {
+
+        return mongo.Tomato.find({accountId: accountId}).sort({startedAt: -1}).exec().then(function (tomatoes) {
+
+            return tomatoes;
+
+        });
+
+    };
+
 });
 
 module.exports = TomatoRepository;
