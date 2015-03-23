@@ -111,10 +111,29 @@ var noLoginRedirect = function (redirect) {
 
 };
 
+var corsOK = function (host) {
+
+    if (!host) {
+
+        host = '*';
+
+    }
+
+    return function (req, res, next) {
+
+        res.append('Access-Control-Allow-Origin', host);
+
+        next();
+
+    };
+
+};
+
 module.exports = auth;
 module.exports.required = authRequired;
 module.exports.loginRedirect = loginRedirect;
 module.exports.noLoginRedirect = noLoginRedirect;
+module.exports.corsOK = corsOK;
 
 module.exports.addRoutes = function (app) {
     'use strict';
