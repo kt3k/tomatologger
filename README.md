@@ -4,8 +4,15 @@
 
 # How to run
 
-You need to set `ES_HOST` environmental variable to run the app.
+You need to set the following env vars.
 
 ```sh
-ES_HOST=username:password@elasticsearch.hostname.com foreman run web
+FB_APP_ID=[facbook app id] \
+FB_APP_SECRET=[facebook secret] \
+MONGO_URI=mongodb://[mongo host]:27017/pomodorometer \
+ES_HOST=[elasticsearch host] \
+REDIS_HOST=[redis host] \
+REDIS_PORT=[redis port] \
+SERVICE_HOSTNAME=localhost:18000 \
+foreman run web
 ```
