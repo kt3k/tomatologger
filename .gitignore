@@ -1,8 +1,14 @@
 # npm
 /node_modules
 
+# bower
+/bower_components
+
 # sensitive files
 /secret
+
+# mongo data
+/data
 
 # bundler config
 /.bundle

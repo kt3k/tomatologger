@@ -1,0 +1,134 @@
+
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <img style="float: left; margin: 7px -7px 0 3px;" src="/img/tomato.png" width=35 height="35" />
+          <span class="navbar-brand" style="margin-left: 0;">
+            Pomodoro Meter
+          </span>
+        </div>
+        <div class="col-sm-4">
+          <p
+          style="margin: 7px 0;"
+          data-api="/api/accounts/me"
+          data-template="#tpl-header-right"
+          class="text-right ajax-view"></p>
+          <script type="text/x-dust" id="tpl-header-right">
+
+            <span class="badge progress-bar-info">
+
+              <img src="/img/tomato.png" width="15" height="15" />
+              {~s}
+              {#account}
+                {?tomatoCount}{tomatoCount}{:else}0{/tomatoCount}
+              {/account}
+
+            </span>
+            {~s}
+            <span>
+              <img src="http://graph.facebook.com/{account.facebookId}/picture" width="35" height="35" style="border-radius: 8px;" title="{account.displayName}" />
+            </span>
+          </script>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+
+    <form class="form ajax-form" onsubmit="return false;">
+
+      <div class="form-group">
+        <input class="form-control" name="title" placeholder="title" />
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="mood" placeholder="mood" />
+      </div>
+
+      <div class="form-group">
+        <textarea class="form-control" name="notes" placeholder="notes"></textarea>
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" name="project" placeholder="project" />
+      </div>
+
+
+      <div class="form-group">
+        <input class="form-control" name="tags" placeholder="tags" />
+      </div>
+
+      <div class="form-group">
+        <button
+          class="form-control btn btn-info"
+          data-api="/api/tomato"
+          data-method="put">Start Pomodoro</button>
+      </div>
+
+    </form>
+
+    <hr style="border-color: #e0e0e0;"/>
+
+    <div class="ajax-view" data-api="/api/tomato" data-template="#tpl-tomato">
+    </div>
+    <script type="text/x-dustjs" id="tpl-tomato">
+      <div>
+
+        {#items}
+
+        <div class="panel panel-default" style="border-color: #ccc;">
+
+          <div class="panel-body" style="padding-bottom: 0px;">
+
+            <p><span class="badge progress-bar-info">
+              <img src="/img/tomato.png" width="15" height="15" /> {title}</p>
+            </p>
+
+            {?mood}
+              <p>mood <span class="label label-default">{mood}</span></p>
+            {/mood}
+
+            {?notes}
+              <p>notes <pre>{notes}</pre></p>
+            {/notes}
+
+            {?project}
+              <p>project <span class="label label-default">{project}</span></p>
+            {/project}
+
+            {?tags}
+            <p>
+              tags
+              {#tags}
+                {~s}<span class="label label-default">{.}</span>
+              {/tags}
+            </p>
+            {/tags}
+
+            <p>started at {startedAt}</p>
+
+            </div>
+
+          </div>
+
+        {/items}
+
+      </div>
+    </script>
+
+  </div>
+    
+  <script>
+  $(function () {
+
+      $('form.ajax-form').on('success.ajax-form', function () {
+
+          location.reload();
+
+      });
+
+  });
+  </script>
