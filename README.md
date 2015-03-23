@@ -1,3 +1,5 @@
+[![Pomodoro meter](https://raw.githubusercontent.com/kt3k/pomodoro-meter/master/public/img/tomato.png)](http://pomodoro-meter.herokuapp.com/)
+
 # pomodoro meter v0.0.1
 
 > logging pomodoros in elasticsearch
