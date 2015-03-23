@@ -5,6 +5,8 @@ set :js_dir, 'js'
 
 set :images_dir, 'img'
 
+set :build_dir, 'public'
+
 set :api_host, 'http://localhost:18000'
 
 ready do
