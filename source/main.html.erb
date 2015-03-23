@@ -11,7 +11,7 @@
         <div class="col-sm-4">
           <p
           style="margin: 7px 0;"
-          data-api="/api/accounts/me"
+          data-api="<%= settings.api_host %>/api/accounts/me"
           data-template="#tpl-header-right"
           class="text-right ajax-view"></p>
           <script type="text/x-dust" id="tpl-header-right">
@@ -64,7 +64,7 @@
       <div class="form-group">
         <button
           class="form-control btn btn-info"
-          data-api="/api/tomato"
+          data-api="<%= settings.api_host %>/api/tomato"
           data-method="put">Start Pomodoro</button>
       </div>
 
@@ -72,7 +72,7 @@
 
     <hr style="border-color: #e0e0e0;"/>
 
-    <div class="ajax-view" data-api="/api/tomato" data-template="#tpl-tomato">
+    <div class="ajax-view" data-api="<%= settings.api_host %>/api/tomato" data-template="#tpl-tomato">
     </div>
     <script type="text/x-dustjs" id="tpl-tomato">
       <div>
