@@ -1,4 +1,4 @@
-# pomodoro meter v0.0.0
+# pomodoro meter v0.0.1
 
 > logging pomodoros in elasticsearch
 
