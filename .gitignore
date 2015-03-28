@@ -8,7 +8,7 @@
 /secret
 
 # mongo data
-/data
+/mongodb
 
 # bundler config
 /.bundle
