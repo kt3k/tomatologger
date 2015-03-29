@@ -3,4 +3,7 @@
 //= require qwest
 //= require dustjs-linkedin
 //= require ajax-view
+//= require gameloop
+//= require dom-timer
+//= require text-timer
 //= require ../../bower_components/ajax-form.js/index.js
