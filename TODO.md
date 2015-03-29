@@ -1,13 +1,13 @@
 # TODO
-- introduce middleman
 - friend link table
-- header right dropdown menu
-- calculate count correctly
 - pomodoro timer component
 - qwest retry control
   - stop retrying PUT/POST requests
 
 # DONE
+- calculate count correctly
+- header left dropdown menu
+- introduce middleman
 - friends page
 - GET /api/accounts
 - create Tomato domain
