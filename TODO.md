@@ -3,6 +3,7 @@
 - pomodoro timer component
 - qwest retry control
   - stop retrying PUT/POST requests
+- add the latest tomato info into account info
 
 # DONE
 - calculate count correctly
