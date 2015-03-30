@@ -17,8 +17,8 @@
     "bootstrap": "~3.3.4",
     "qwest": "~1.5.9",
     "dustjs-linkedin": "~2.6.1",
-    "ajax-view": "~0.1.4",
+    "ajax-view": "~0.2.0",
     "ajax-form.js": "~0.1.2",
-    "text-timer": "~0.1.1"
+    "text-timer": "~0.2.0"
   }
 }
