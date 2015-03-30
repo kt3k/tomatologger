@@ -19,6 +19,7 @@
     "dustjs-linkedin": "~2.6.1",
     "ajax-view": "~0.2.0",
     "ajax-form.js": "~0.1.2",
-    "text-timer": "~0.2.0"
+    "text-timer": "~0.2.0",
+    "moment": "~2.9.0"
   }
 }

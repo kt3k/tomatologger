@@ -2,6 +2,7 @@
 //= require bootstrap
 //= require qwest
 //= require dustjs-linkedin
+//= require moment
 //= require ajax-view
 //= require gameloop
 //= require dom-timer
