@@ -118,7 +118,7 @@
             </p>
             {/tags}
 
-            <p>started at {startedAt}</p>
+            <p><span class="text-timer pomodoro-timer" data-end-at="{endsAt}"></span></p>
 
             </div>
 
@@ -137,6 +137,22 @@
       $('form.ajax-form').on('success.ajax-form', function () {
 
           location.reload();
+
+      });
+
+      $('.ajax-view').on('loaded.ajax-view', function () {
+
+          $('.pomodoro-timer', this).one('stop.dom-timer', function () {
+
+              var $el = $(this);
+
+              var endAt = moment(+$el.attr('data-end-at'));
+
+              $el.html('<span class="text-success">✔</span> ' + endAt.format('YYYY/MM/DD HH:mm'));
+
+          });
+
+          $(document).trigger('init.text-timer');
 
       });
 
