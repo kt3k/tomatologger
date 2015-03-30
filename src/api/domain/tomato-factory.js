@@ -33,6 +33,10 @@ var TomatoFactory = module.exports = subclass(function (pt) {
             obj.startedAt = now;
         }
 
+        if (!obj.endsAt) {
+            obj.endsAt = now + 25 * 60 * 1000;
+        }
+
         if (!obj.privacy) {
             obj.privacy = 'friend';
         }

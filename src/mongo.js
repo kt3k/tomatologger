@@ -41,7 +41,7 @@ var Tomato = mongoose.model('Tomato', {
     startedAt: Number,
     createdAt: Number,
     updatedAt: Number,
-    endedAt: Date,
+    endsAt: Number,
     status: String, // started, finished, interupted
     project: String,
     tags: [String],
