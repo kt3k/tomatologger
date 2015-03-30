@@ -1,11 +1,16 @@
 # TODO
+- a bit more visual timer
+- add the latest tomato info into account info
 - friend link table
-- pomodoro timer component
+  - people page
+  - friends page
+
+# PENDING
 - qwest retry control
   - stop retrying PUT/POST requests
-- add the latest tomato info into account info
 
 # DONE
+- pomodoro timer component
 - calculate count correctly
 - header left dropdown menu
 - introduce middleman
