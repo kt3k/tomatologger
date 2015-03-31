@@ -18,7 +18,7 @@
     "qwest": "~1.5.9",
     "dustjs-linkedin": "~2.6.1",
     "ajax-view": "~0.2.0",
-    "ajax-form.js": "~0.1.2",
+    "ajax-form.js": "~0.1.3",
     "text-timer": "~0.2.0",
     "moment": "~2.9.0"
   }
