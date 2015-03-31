@@ -1,6 +1,6 @@
 {
   "name": "tomatologger",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "logging pomodoros",
   "main": "app.js",
   "scripts": {
