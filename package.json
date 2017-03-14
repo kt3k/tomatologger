@@ -31,7 +31,7 @@
     "mongoose": "^4.7.7",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
-    "redis": "^2.6.5",
+    "redis": "^2.7.1",
     "subclassjs": "^1.2.0",
     "then-redis": "^2.0.1",
     "uuid": "^3.0.1"
